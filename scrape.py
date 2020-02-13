@@ -19,29 +19,14 @@ def output_img(list_of_links):
     del resp
 
 
-def get_links():  #returns list of links
-    url = requests.get("https://www.pinkbike.com/photo/podlist/?page=1")
-    # print(url.content)
+def get_links_from_json():  #returns list of links
+    with open('links.json') as f:
+        data = json.load(f)
+    outdata = data['url']
 
-    soup = BeautifulSoup(url.content, "html5lib")
-    # print(soup.prettify())
-    links = soup.find_all('span', {'class': 'thumbnail crop-thumbnail'})
-    # print(links)
-
-    photourls = []
-
-    for link in links:
-        temp = link.img['src']
-        temp2 = temp.split('/')
-        temp3 = temp2[3].split('p2pb')
-        photonum = temp3[1]
-        finalurl = 'http://lp1.pinkbike.org/p0pb' + photonum + "/" + photonum + ".jpg"
-        # print(finalurl) #url
-        photourls.append(finalurl)
-
-    return photourls
+    return outdata
 
 
-url_list = get_links()
+url_list = get_links_from_json()
 
 output_img(url_list)
