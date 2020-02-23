@@ -54,4 +54,8 @@ url_list = get_links_from_json()
 
 output_img(url_list)
 
-set_desktop_background(os.getcwd() + 'local_image.jpg')
+if sys.platform.startswith('win32'):
+    set_desktop_background(os.getcwd() + "\\" + 'local_image.jpg')
+
+elif sys.platform.startswith('darwin'):
+    set_desktop_background(os.getcwd() + "//" + 'local_image.jpg')
