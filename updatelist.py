@@ -16,6 +16,7 @@ def get_links(page_num):  # returns list of links
 
     for link in links:
         temp = link.img['src']
+        print(temp)
         temp2 = temp.split('/')
         temp3 = temp2[3].split('p2pb')
         photonum = temp3[1]
